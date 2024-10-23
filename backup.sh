@@ -1,8 +1,5 @@
 #! /bin/bash
 
-# NOTE: for this script to work you need to have jq installed:
-#    sudo apt install jq -y
-
 serverId= # your server ID goes here
 backupId= # your backup ID goes here
 apiKey="" # your API key goes here
@@ -22,12 +19,13 @@ while [[ $i -le (6 * $timout) ]]; do
     newBackup=$((curl $url -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer $apiKey" | jq '.backup.backups | last | .uuid') 2> /dev/null)
     if [[ $oldBackup != $newBackup ]]; then
         echo " done"
-        exit 0
+        i=(6 * $timeout)
     else
         echo -n "."
         ((i+=1))
     fi
 done
 
-echo -e "\nWaited $timeout minutes but the backup didn't finish.\n\nExiting."
-exit 1
+if [[ $oldBackup == $newBackup ]]; then
+    echo -e "\nWaited $timeout minutes but the backup didn't finish.\n\nExiting."
+fi

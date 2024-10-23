@@ -1,14 +1,14 @@
 # Forge Backup
 
 ## Description
-A script to trigger a DB backup in Forge. Use this is deploy scripts to back up every time you deploy. **Note:** I am not affiliated in any way with Laravel or Forge. 
+A script to trigger a DB backup in Forge. Use this in deploy scripts to back up every time you deploy.
 
 ## Requirements
 1. A [Laravel Forge](https://forge.laravel.com/) account, with a valid [API key](https://forge.laravel.com/api-documentation#authentication)
-2. A Forge managed server with `jq` and `curl` installed (if you created the server through Forge recently, it probably has both installed already.)
+2. A server with `jq` and `curl` installed (if you created the server through Forge recently, it probably has both installed already.)
 
 ## How to use
-Copy the contents of [backup.sh](backup.sh) to the deploy script section of Forge (also works in Envoyer). The three required variables are the server ID, the backup ID, and your [API key](https://forge.laravel.com/user-profile/api). 
+Copy the contents of [backup.sh](backup.sh) to the deploy script section of Forge (also works in Envoyer, or theoretically any server...). The three required variables are the server ID, the backup ID, and your [API key](https://forge.laravel.com/user-profile/api). 
 
 You may optionally increase or decrease the time before this script will timeout (default is 10 minutes). You can also uncomment the last two lines of the script if you want the deployment to fail on timeout.
 

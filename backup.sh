@@ -1,11 +1,14 @@
 #! /bin/bash
 
+# REQUIRED
 serverId=123456 # your server ID goes here
 backupId=54321 # your backup ID goes here
 apiKey="your_API_key_goes_here"
-url="https://forge.laravel.com/api/v1/servers/$serverId/backup-configs/$backupId"
 
+# OPTIONAL
 timeout=10 # default timout 10 minutes
+
+url="https://forge.laravel.com/api/v1/servers/$serverId/backup-configs/$backupId"
 oldBackup=$((curl $url -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer $apiKey" | jq '.backup.backups | last | .uuid') 2> /dev/null)
 
 echo -n "Starting backup"
